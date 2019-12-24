@@ -1,16 +1,16 @@
 # NextJS TypeScript Assessment
 
-# For setup
+## For setup
 ```shell script
 npm install
 ```
 
-# For Development
+## For Development
 ```shell script
 npm run dev
 ```
 
-# For Deployment
+## For Deployment
 ```shell script
 npm run build
 ```
