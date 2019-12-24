@@ -5,12 +5,12 @@
 npm install
 ```
 
-#For Development
+# For Development
 ```shell script
 npm run dev
 ```
 
-#For Deployment
+# For Deployment
 ```shell script
 npm run build
 ```
