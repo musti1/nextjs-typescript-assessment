@@ -34,8 +34,15 @@ type ActionComponentProps = { stockData?: any | undefined } & React.HTMLProps<HT
 
 const ActionComponent = (props: ActionComponentProps) => {
     const {symbol, date, open, high, close, low, volume} = props.stockData;
+    const pivotPoint = ((Number(high)+Number(low)+Number(close))/3).toFixed(2);
+    const firstResistance = ((2*Number(pivotPoint)) - Number(low)).toFixed(2);
+    const firstSupport = (((2*Number(pivotPoint)) - Number(high))).toFixed(2);
+    const secondResistance = (Number(pivotPoint) + (Number(high) - Number(low))).toFixed(2);
+    const secondSupport = (Number(pivotPoint) - (Number(high) - Number(low))).toFixed(2);
+    const thirdResistance = (Number(high) + (Number(pivotPoint) - Number(low))).toFixed(2);
+    const thirdSupport = (Number(low) - (Number(high) - Number(pivotPoint))).toFixed(2);
     let marketName = MarketName(symbol, date);
-    const data = props.stockData;
+
     return (
         <>
             <p className="text-center font-bold text-3xl">
@@ -51,7 +58,7 @@ const ActionComponent = (props: ActionComponentProps) => {
                     </div>
                     <div className="w-1/2 bg-gray-500">
                         <p className="text-black text-2xl" style={{marginBottom: 0}}>
-                            ${open}
+                            ${parseFloat(open).toFixed(2)}
                         </p>
                     </div>
                 </div>
@@ -63,7 +70,7 @@ const ActionComponent = (props: ActionComponentProps) => {
                     </div>
                     <div className="w-1/2 bg-gray-500">
                         <p className="text-black text-2xl" style={{marginBottom: 0}}>
-                            ${low}
+                            ${parseFloat(low).toFixed(2)}
                         </p>
                     </div>
                 </div>
@@ -75,7 +82,7 @@ const ActionComponent = (props: ActionComponentProps) => {
                     </div>
                     <div className="w-1/2 bg-gray-500">
                         <p className="text-black text-2xl" style={{marginBottom: 0}}>
-                            ${high}
+                            ${parseFloat(high).toFixed(2)}
                         </p>
                     </div>
                 </div>
@@ -89,7 +96,7 @@ const ActionComponent = (props: ActionComponentProps) => {
                     </div>
                     <div className="w-1/2 bg-gray-500">
                         <p className="text-black text-2xl" style={{marginBottom: 0}}>
-                            ${close}
+                            ${parseFloat(close).toFixed(2)}
                         </p>
                     </div>
                 </div>
@@ -115,18 +122,18 @@ const ActionComponent = (props: ActionComponentProps) => {
                             <p className="font-bold text-lg text-black" style={{marginBottom: 0}}>Support 1:</p>
                         </div>
                         <div className="flex float-right">
-                            <p className="text-lg text-black" style={{marginBottom: 0}}>2.12</p>
+                            <p className="text-lg text-black" style={{marginBottom: 0}}>{firstSupport}</p>
                         </div>
-                        <Progress percent={data.open} showInfo={false}/>
+                        <Progress percent={firstSupport} showInfo={false}/>
                     </div>
                     <div className="w-1/4 h-16 bg-gray-400 p-2">
                         <div className="flex float-left">
                             <p className="font-bold text-lg text-black" style={{marginBottom: 0}}>Resistance 1:</p>
                         </div>
                         <div className="flex float-right">
-                            <p className="text-lg text-black" style={{marginBottom: 0}}>2.50</p>
+                            <p className="text-lg text-black" style={{marginBottom: 0}}>{firstResistance}</p>
                         </div>
-                        <Progress percent={data.open} showInfo={false}/>
+                        <Progress percent={firstResistance} showInfo={false}/>
 
                     </div>
                     <div className="w-1/4 h-16 bg-gray-500 p-4 text-center">
@@ -145,9 +152,9 @@ const ActionComponent = (props: ActionComponentProps) => {
                             <p className="font-bold text-lg text-black" style={{marginBottom: 0}}>Support 2:</p>
                         </div>
                         <div className="flex float-right">
-                            <p className="text-lg text-black" style={{marginBottom: 0}}>1.99</p>
+                            <p className="text-lg text-black" style={{marginBottom: 0}}>{secondSupport}</p>
                         </div>
-                        <Progress percent={data.open} showInfo={false}/>
+                        <Progress percent={secondSupport} showInfo={false}/>
 
                     </div>
                     <div className="w-1/4 h-16 bg-gray-400 p-2">
@@ -156,9 +163,9 @@ const ActionComponent = (props: ActionComponentProps) => {
                             <p className="font-bold text-lg text-black" style={{marginBottom: 0}}>Resistance 2:</p>
                         </div>
                         <div className="flex float-right">
-                            <p className="text-lg text-black" style={{marginBottom: 0}}>2.12</p>
+                            <p className="text-lg text-black" style={{marginBottom: 0}}>{secondResistance}</p>
                         </div>
-                        <Progress percent={data.open} showInfo={false}/>
+                        <Progress percent={secondResistance} showInfo={false}/>
 
                     </div>
                     <div className="w-1/4 h-16 bg-gray-500 p-4 text-center">
@@ -177,18 +184,18 @@ const ActionComponent = (props: ActionComponentProps) => {
                             <p className="font-bold text-lg text-black" style={{marginBottom: 0}}>Support 3:</p>
                         </div>
                         <div className="flex float-right">
-                            <p className="text-lg text-black" style={{marginBottom: 0}}>2.12</p>
+                            <p className="text-lg text-black" style={{marginBottom: 0}}>{thirdSupport}</p>
                         </div>
-                        <Progress percent={data.open} showInfo={false}/>
+                        <Progress percent={thirdSupport} showInfo={false}/>
                     </div>
                     <div className="w-1/4 h-16 bg-gray-400 p-2">
                         <div className="flex float-left">
                             <p className="font-bold text-lg text-black" style={{marginBottom: 0}}>Resistance 3:</p>
                         </div>
                         <div className="flex float-right">
-                            <p className="text-lg text-black" style={{marginBottom: 0}}>2.50</p>
+                            <p className="text-lg text-black" style={{marginBottom: 0}}>{thirdResistance}</p>
                         </div>
-                        <Progress percent={data.open} showInfo={false}/>
+                        <Progress percent={thirdResistance} showInfo={false}/>
 
                     </div>
                     <div className="w-1/4 h-16 bg-gray-500 p-4 text-center">
