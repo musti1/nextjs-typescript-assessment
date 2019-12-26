@@ -44,7 +44,7 @@ const columns = [
 
 const TableDisplay = (props: TableDisplayProps) => (
     <>
-        <Table dataSource={props.dataSource} columns={columns}/>;
+        <Table dataSource={props.dataSource} columns={columns}/>
     </>
 );
 

@@ -1,5 +1,5 @@
 import React from "react";
-import {Progress, Icon, Button} from 'antd';
+import {Progress, Icon} from 'antd';
 import 'antd/dist/antd.css';
 
 const MarketName = (symbol: string, date: string) => {
@@ -34,7 +34,6 @@ type ActionComponentProps = { stockData?: any | undefined } & React.HTMLProps<HT
 
 const ActionComponent = (props: ActionComponentProps) => {
     const {symbol, date, open, high, close, low, volume} = props.stockData;
-    const balance = 10000;
     let marketName = MarketName(symbol, date);
     const data = props.stockData;
     return (
@@ -42,18 +41,6 @@ const ActionComponent = (props: ActionComponentProps) => {
             <p className="text-center font-bold text-3xl">
                 {marketName}
             </p>
-            <div className="max-w-sm h-12 rounded overflow-hidden text-center shadow-lg flex mb-6">
-                <div className="w-full bg-gray-500">
-                    <p className="font-bold text-black text-2xl pl-2" style={{marginBottom: 0}}>
-                        Balance:
-                    </p>
-                </div>
-                <div className="w-full bg-gray-500">
-                    <p className="text-black text-2xl" style={{marginBottom: 0}}>
-                        ${balance}
-                    </p>
-                </div>
-            </div>
 
             <div className="rounded overflow-hidden shadow-lg flex mb-6">
                 <div className="w-1/3 bg-gray-400 p-2 flex">
@@ -242,11 +229,6 @@ const ActionComponent = (props: ActionComponentProps) => {
                     </div>
                 </div>
 
-            </div>
-            <div className="p-10">
-                <Button href={`/virtualTrade?symbol=${symbol}`} type="primary" shape="round" size="large">
-                    Virtual Trade
-                </Button>
             </div>
         </>
     )

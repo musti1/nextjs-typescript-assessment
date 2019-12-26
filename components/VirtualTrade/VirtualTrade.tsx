@@ -120,7 +120,6 @@ const VirtualTrade = (props: VirtualTradeProps) => {
     });
 
     const handleSell = (key: number) => {
-        console.log(key, JSON.parse(localStorage.getItem('stockData') as string))
         const local = JSON.parse(localStorage.getItem('stockData') as string);
         // @ts-ignore
         const sellPrice = local.buy[key].sellPrice;
@@ -162,7 +161,7 @@ const VirtualTrade = (props: VirtualTradeProps) => {
             data.action = (
                 <Button type="primary" shape="round" size='small' onClick={() => handleSell(index)}>
                     Sell
-                </Button>)
+                </Button>);
             return data
         });
         // @ts-ignore
@@ -174,13 +173,10 @@ const VirtualTrade = (props: VirtualTradeProps) => {
             buy: updatedData,
             balance: Number(localStorageData.balance) - Number(currentStockData.total)
         }));
-        console.log("buy", localStorage.getItem('stockData'));
-        console.log("buy", localStorageData);
     };
 
     useEffect(() => {
         if (localStorage.getItem('stockData')) {
-            console.log("hereeeee", localStorage.getItem('stockData'));
             const local = JSON.parse(localStorage.getItem('stockData') as string);
             // @ts-ignore
             const updatedData = local.buy.map((data, index) => {
@@ -196,7 +192,7 @@ const VirtualTrade = (props: VirtualTradeProps) => {
             // @ts-ignore
             setLocalStorageData({buy: updatedData, balance: local.balance});
             localStorage.setItem('stockData', JSON.stringify({buy: updatedData, balance: local.balance}))
-        }else {
+        } else {
             localStorage.setItem('stockData', JSON.stringify(localStorageData))
         }
     }, []);
@@ -226,7 +222,7 @@ const VirtualTrade = (props: VirtualTradeProps) => {
                     </p>
                 </div>
             </div>
-            <div className="rounded overflow-hidden shadow-lg mt-10">
+            <div className="rounded overflow-hidden shadow-lg mt-10 pb-6">
                 <div className="flex">
                     <div className="w-1/3 h-16 bg-gray-500  p-5">
                         <div className="flex float-left">
@@ -314,7 +310,9 @@ const VirtualTrade = (props: VirtualTradeProps) => {
                 </div>
 
             </div>
-            <Table dataSource={localStorageData.buy} columns={columns}/>;
+            <div className="mt-10">
+                <Table dataSource={localStorageData.buy} columns={columns}/>
+            </div>
         </>
     )
 };
