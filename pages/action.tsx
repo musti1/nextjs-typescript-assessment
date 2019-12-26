@@ -2,14 +2,14 @@ import * as React from "react";
 import "../styles/index.css";
 import Header from "../components/Common/Header";
 import NavBar from "../components/Common/NavBar";
-import StockMarket from "../components/StockMarket/StockMarket";
+import ActionComponent from "../components/VirtualTrade/Action";
 
-type Query = {key?: string}
+type Query = {symbol?: string; date?: string; open?: number; high?: number; low?: number; close?: number; volume?: number; }
 type Url = {query?: Query}
-type HomeProps = { url?: Url } & React.HTMLProps<HTMLDivElement>;
-export default (props: HomeProps ) => {
+type ActionProps = { url?: Url } & React.HTMLProps<HTMLDivElement>;
+export default (props: ActionProps ) => {
     // @ts-ignore
-    const key = (typeof props.url.query.key !== "undefined")? props.url.query.key: "";
+    const data = (typeof props.url.query !== "undefined")? props.url.query: "";
     return (
     <div className="font-sans antialiased h-screen">
 
@@ -18,7 +18,7 @@ export default (props: HomeProps ) => {
             <NavBar/>
 
             <div className="bg-grey-light h-10 p-10">
-                <StockMarket symbol={key}/>
+                <ActionComponent stockData={data}/>
             </div>
         </div>
     </div>

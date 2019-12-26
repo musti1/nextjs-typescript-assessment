@@ -3,7 +3,7 @@ import React from "react";
 import {XYPlot, XAxis, YAxis, HorizontalGridLines, LineSeries,} from "react-vis"
 import '../../node_modules/react-vis/dist/style.css';
 
-type ChartDisplayProps = { historicData?: [] | undefined} & React.HTMLProps<HTMLDivElement>;
+type ChartDisplayProps = { historicData?: any} & React.HTMLProps<HTMLDivElement>;
 
 const ChartDisplay = (props: ChartDisplayProps) => {
     // @ts-ignore

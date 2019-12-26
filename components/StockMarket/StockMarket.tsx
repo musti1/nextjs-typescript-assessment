@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {getHistoricData} from "../../services/stockApi";
+import {getStockData} from "../../services/stockApi";
 import TableDisplay from "./TableDisplay";
 import ChartDisplay from "./ChartDisplay";
 
@@ -34,9 +34,9 @@ const MarketName = (symbol: string | undefined) => {
 };
 
 const reformedData = async (timeSeries: string, symbol: string | undefined) => {
-    let data: { "key": number; "date": string; "open": any; "high": any; "low": any; "close": any; "volume": any; }[] = [];
+    let data: { "key": number; "date": string; "open": any; "high": any; "low": any; "close": any; "volume": any; "action": any; }[] = [];
     if (typeof symbol !== "undefined" && symbol !== '') {
-        const historicData = await getHistoricData(timeSeries, symbol);
+        const historicData = await getStockData(timeSeries, symbol);
         data = Object.keys(historicData['Monthly Time Series']).map((key, index) => {
             return {
                 "key": index,
@@ -45,7 +45,13 @@ const reformedData = async (timeSeries: string, symbol: string | undefined) => {
                 "high": historicData['Monthly Time Series'][key]["2. high"],
                 "low": historicData['Monthly Time Series'][key]["3. low"],
                 "close": historicData['Monthly Time Series'][key]["4. close"],
-                "volume": historicData['Monthly Time Series'][key]["5. volume"]
+                "volume": historicData['Monthly Time Series'][key]["5. volume"],
+                "action": (
+                    <span>
+                        <a href={`/action?symbol=${symbol}&date=${key}&open=${historicData['Monthly Time Series'][key]['1. open']}&high=${historicData['Monthly Time Series'][key]['2. high']}&low=${historicData['Monthly Time Series'][key]['3. low']}&close=${historicData['Monthly Time Series'][key]['4. close']}&volume=${historicData['Monthly Time Series'][key]['5. volume']}`}>
+                            Action
+                        </a>
+                    </span>)
             }
 
 
@@ -61,12 +67,13 @@ const StockMarket = (props: StockMarketProps) => {
     let marketName = MarketName(symbol);
     const [historicData, setHistoricData] = useState([]);
 
-    useEffect ( ()=> {
+    useEffect(() => {
         async function ReformedData() {
             const data = await reformedData(TIME_SERIES, symbol);
             // @ts-ignore
             setHistoricData(data);
         }
+
         ReformedData()
     }, []);
     return (

@@ -2,7 +2,7 @@ import React from "react";
 import {Table} from "antd";
 import 'antd/dist/antd.css';
 
-type TableDisplayProps = { dataSource?: { "key": number; "date": string; "open": any; "high": any; "low": any; "close": any; "volume": any; }[] } & React.HTMLProps<HTMLDivElement>;
+type TableDisplayProps = { dataSource?: { "key": number; "date": string; "open": any; "high": any; "low": any; "close": any; "volume": any; action: any; }[] } & React.HTMLProps<HTMLDivElement>;
 
 const columns = [
     {
@@ -35,6 +35,11 @@ const columns = [
         dataIndex: 'volume',
         key: 'volume',
     },
+    {
+        title: 'Action',
+        dataIndex: 'action',
+        key: 'action'
+    }
 ];
 
 const TableDisplay = (props: TableDisplayProps) => (

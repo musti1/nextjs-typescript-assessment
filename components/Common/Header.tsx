@@ -1,7 +1,5 @@
 import React from "react";
 
-// type HeaderProps = { message?: string } & React.HTMLProps<HTMLDivElement>;
-
 const Header = () => (
 
     <header className="z-50 h-16 w-full bg-grey-darker shadow flex items-center justify-between">
